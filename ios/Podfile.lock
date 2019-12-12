@@ -9,6 +9,8 @@ PODS:
     - Firebase/Core
     - Firebase/Firestore (~> 6.0)
     - Flutter
+  - Firebase/Analytics (6.4.0):
+    - Firebase/Core
   - Firebase/Core (6.4.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 6.0.3)
@@ -103,13 +105,13 @@ PODS:
 
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
+  - Firebase/Analytics
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - BoringSSL-GRPC
-    - Firebase
     - FirebaseAnalytics
     - FirebaseAuthInterop
     - FirebaseCore
@@ -122,6 +124,8 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - Protobuf
+  trunk:
+    - Firebase
 
 EXTERNAL SOURCES:
   cloud_firestore:
@@ -150,6 +154,6 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 3f617b9a6e73605565086864c9bc26b2bf2dd5a3
 
-PODFILE CHECKSUM: 7fb83752f59ead6285236625b82473f90b1cb932
+PODFILE CHECKSUM: 8dd475d7180774963ba7e09cf64886fd51da77fe
 
 COCOAPODS: 1.8.3
