@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import './buildMachineLinst.dart';
-import './headers.dart';
-
+import './addMachine.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,26 +20,31 @@ class MyHomePage extends StatelessWidget {
 
   final String title;
 
-    @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-        ),
-        body:Column(
-          children: <Widget>[
-            Expanded(
-              child: SizedBox(
-                child: BuildMachineList(),
-              ),
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: SizedBox(
+              child: BuildMachineList(),
             ),
-          ],
-        ),
-        backgroundColor: Colors.blueGrey[100],
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => null,
-          child: Icon(Icons.add),
-        ),
-        );
+          ),
+        ],
+      ),
+      backgroundColor: Colors.blueGrey[300],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AddMachine()),
+            );
+          },
+        child: Icon(Icons.add),
+      ),
+    );
   }
 }

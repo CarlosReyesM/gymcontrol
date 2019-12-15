@@ -4,6 +4,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class BuildMachineList extends StatelessWidget {
   const BuildMachineList({Key key}) : super(key: key);
 
+  down(String field, Object reference, int amount) {
+    Firestore.instance.runTransaction((transaction) async {
+      DocumentSnapshot freshSnap = await transaction.get(reference);
+      await transaction.get(reference);
+      await transaction
+          .update(freshSnap.reference, {field: freshSnap[field] - amount});
+    });
+  }
+
+  up(String field, Object reference, int amount) {
+    Firestore.instance.runTransaction((transaction) async {
+      DocumentSnapshot freshSnap = await transaction.get(reference);
+      await transaction.get(reference);
+      await transaction
+          .update(freshSnap.reference, {field: freshSnap[field] + amount});
+    });
+  }
+
   Widget _buildMachineList(BuildContext context, DocumentSnapshot document) {
     return Card(
       child: Row(
@@ -18,11 +36,11 @@ class BuildMachineList extends StatelessWidget {
                     'Machine name',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                    Text(
+                  Text(
                     document['name'],
                     style: TextStyle(fontSize: 16),
                     textAlign: TextAlign.end,
-                  ) ,
+                  ),
                 ],
               ),
             ),
@@ -41,24 +59,8 @@ class BuildMachineList extends StatelessWidget {
                 ),
               ],
             ),
-            onLongPress: () {
-              Firestore.instance.runTransaction((transaction) async {
-                DocumentSnapshot freshSnap =
-                    await transaction.get(document.reference);
-                await transaction.get(document.reference);
-                await transaction
-                    .update(freshSnap.reference, {'kg': freshSnap['kg'] - 5});
-              });
-            },
-            onTap: () {
-              Firestore.instance.runTransaction((transaction) async {
-                DocumentSnapshot freshSnap =
-                    await transaction.get(document.reference);
-                await transaction.get(document.reference);
-                await transaction
-                    .update(freshSnap.reference, {'kg': freshSnap['kg'] + 5});
-              });
-            },
+            onLongPress: () => down('kg', document.reference, 5),
+            onTap: () => up('kg', document.reference, 5),
           ),
           GestureDetector(
             child: Column(
@@ -74,24 +76,8 @@ class BuildMachineList extends StatelessWidget {
                 ),
               ],
             ),
-            onLongPress: () {
-              Firestore.instance.runTransaction((transaction) async {
-                DocumentSnapshot freshSnap =
-                    await transaction.get(document.reference);
-                await transaction.get(document.reference);
-                await transaction.update(
-                    freshSnap.reference, {'sets': freshSnap['sets'] - 1});
-              });
-            },
-            onTap: () {
-              Firestore.instance.runTransaction((transaction) async {
-                DocumentSnapshot freshSnap =
-                    await transaction.get(document.reference);
-                await transaction.get(document.reference);
-                await transaction.update(
-                    freshSnap.reference, {'sets': freshSnap['sets'] + 1});
-              });
-            },
+            onLongPress: () => down('sets', document.reference, 1),
+            onTap: () => up('sets', document.reference, 1),
           ),
           GestureDetector(
             child: Column(
@@ -107,24 +93,8 @@ class BuildMachineList extends StatelessWidget {
                 ),
               ],
             ),
-            onLongPress: () {
-              Firestore.instance.runTransaction((transaction) async {
-                DocumentSnapshot freshSnap =
-                    await transaction.get(document.reference);
-                await transaction.get(document.reference);
-                await transaction.update(
-                    freshSnap.reference, {'repeats': freshSnap['repeats'] - 1});
-              });
-            },
-            onTap: () {
-              Firestore.instance.runTransaction((transaction) async {
-                DocumentSnapshot freshSnap =
-                    await transaction.get(document.reference);
-                await transaction.get(document.reference);
-                await transaction.update(
-                    freshSnap.reference, {'repeats': freshSnap['repeats'] + 1});
-              });
-            },
+            onLongPress: () => down('repeats', document.reference, 1),
+            onTap: () => up('repeats', document.reference, 1),
           ),
         ],
       ),
