@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BuildMachineList extends StatelessWidget {
   const BuildMachineList({Key key}) : super(key: key);
-
+git 
   down(String field, Object reference, int amount) {
     Firestore.instance.runTransaction((transaction) async {
       DocumentSnapshot freshSnap = await transaction.get(reference);
