@@ -7,6 +7,15 @@ class AddMachine extends StatefulWidget {
   }
 }
 
+bool isNumeric(String s) {
+  if(s == null) {
+    return false;
+  }
+  final num value = num.tryParse(s);
+  final bool isValid = value != null && value > 0;
+  return isValid;
+}
+
 class AddMachineState extends State<AddMachine> {
   final _formKey = GlobalKey<FormState>();
   @override
@@ -42,10 +51,10 @@ class AddMachineState extends State<AddMachine> {
                       labelText: 'Kilos *',
                     ),
                     validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Please enter some text';
+                      if (!isNumeric(value)) {
+                        return 'Please enter some number';
                       }
-                      print(value);
+                      print(isNumeric(value));
                       return null;
                     },
                   ),
@@ -56,8 +65,8 @@ class AddMachineState extends State<AddMachine> {
                       labelText: 'Sets *',
                     ),
                     validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Please enter some text';
+                      if (!isNumeric(value)) {
+                        return 'Please enter some number';
                       }
                       print(value);
                       return null;
@@ -70,8 +79,8 @@ class AddMachineState extends State<AddMachine> {
                       labelText: 'Repeats *',
                     ),
                     validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Please enter some text';
+                      if (!isNumeric(value)) {
+                        return 'Please enter some number';
                       }
                       print(value);
                       return null;
