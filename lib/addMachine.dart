@@ -13,7 +13,7 @@ _down(String name, int kilos, int sets, int repeats) {
   var uuid = Uuid();
   var idString = uuid.toString();
   Firestore.instance.collection('machines').add(
-    {"name": name, "kilos": kilos, "repeats": repeats, "sets": sets}
+    {"name": name, "kg": kilos, "repeats": repeats, "sets": sets}
   );
 }
 
