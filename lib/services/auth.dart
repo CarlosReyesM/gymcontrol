@@ -1,19 +1,33 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:gymcontrol/models/user.dart';
 
-class AuthServide {
+class AuthService {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  // create user object base on firebase user 
+
+  User _userFromFirebaseUser(FirebaseUser user) {
+    return user != null ? User(uid: user.uid) : null;
+  }
+
+  // auth change user stream
+
+  Stream<User> get user {
+    return _auth.onAuthStateChanged
+    .map(_userFromFirebaseUser);
+  }
+
   Future signInAnon() async {
     try {
       AuthResult result = await _auth.signInAnonymously();
       FirebaseUser user = result.user;
-      return user;
+      return _userFromFirebaseUser(user);
     } catch(e) {
       print(e.toString());
       return null;
     }
   }
-  // TODO sign in with email and password
-  // TODO register with email and password 
-  // TODO sign out 
+  //  sign in with email and password
+  //  register with email and password 
+  //  sign out 
 }

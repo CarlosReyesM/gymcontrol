@@ -8,14 +8,14 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
 
-  final AuthServide _auth = AuthServide();
+  final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[600],
+      backgroundColor: Colors.blueGrey[600],
       appBar: AppBar(
-        backgroundColor: Colors.grey[900],
+        backgroundColor: Colors.blueGrey[900],
         elevation: 0.0,
         title: Text('Sign in to Gym Control'),
       ),
@@ -23,6 +23,7 @@ class _SignInState extends State<SignIn> {
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Center(
           child: RaisedButton(
+            color: Colors.blueGrey[200],
             child: Text('Sign in anonusmally'),
             onPressed: () async {
               dynamic result = await _auth.signInAnon();
@@ -30,7 +31,7 @@ class _SignInState extends State<SignIn> {
                 print('Error sign in');
               } else {
                 print('Signed in');
-                print(result);
+                print(result.uid);
               }
             },
           ),
