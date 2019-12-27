@@ -24,7 +24,7 @@ class _SignInState extends State<SignIn> {
         child: Center(
           child: RaisedButton(
             color: Colors.blueGrey[200],
-            child: Text('Sign in anonusmally'),
+            child: Text('Sign in annonimouslly'),
             onPressed: () async {
               dynamic result = await _auth.signInAnon();
               if (result == null) {
