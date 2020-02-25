@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gymcontrol/services/auth.dart';
 import 'package:provider/provider.dart';
-import '../models/user.dart';
-import './wrapper.dart';
+import 'models/user.dart';
+import 'screens/wrapper.dart';
 
 
 void main() => runApp(MyApp());
